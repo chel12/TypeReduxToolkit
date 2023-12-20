@@ -1,26 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useAppDispatch } from './hook';
+import { addTodo } from './store/todoSlice';
+import InputField from './components/InputField';
+import TodoList from './components/TodoList';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [text, setText] = useState('');
+	const dispatch = useAppDispatch();
+
+	const handleAction = () => {
+		if (text.trim().length) {
+			dispatch(addTodo(text));
+			setText('');
+		}
+	};
+
+	return (
+		<div className="App">
+			<InputField
+				value={text}
+				handleInput={setText}
+				handleSubmit={handleAction}
+			/>
+
+			{/* {status === 'loading' && <h2>Loading....</h2>}
+			{error && <h2>An error occured: {error}</h2>} */}
+
+			<TodoList />
+		</div>
+	);
 }
 
 export default App;

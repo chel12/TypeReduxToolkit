@@ -1,5 +1,5 @@
 import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
-import type { RootState, AppDispatch } from './store/todoSlice';
+import type { RootState, AppDispatch } from './store/index';
 
 //типизация useDispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>();
